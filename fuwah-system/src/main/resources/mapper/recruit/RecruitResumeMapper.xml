@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuwah.recruit.mapper.RecruitResumeMapper">
+    
+    <resultMap type="RecruitResume" id="RecruitResumeResult">
+        <result property="resumeId"    column="resume_id"    />
+        <result property="name"    column="name"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="email"    column="email"    />
+        <result property="sex"    column="sex"    />
+        <result property="birthDate"    column="birth_date"    />
+        <result property="age"    column="age"    />
+        <result property="jobIntention"    column="job_intention"    />
+        <result property="major"    column="major"    />
+        <result property="education"    column="education"    />
+        <result property="workSeniority"    column="work_seniority"    />
+        <result property="industry"    column="industry"    />
+        <result property="monthlySalary"    column="monthly_salary"    />
+        <result property="salaryStructure"    column="salary_structure"    />
+        <result property="address"    column="address"    />
+        <result property="educationExperience"    column="education_experience"    />
+        <result property="workExperience"    column="work_experience"    />
+        <result property="selfEvaluation"    column="self_evaluation"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="resumeSource"    column="resume_source"    />
+        <result property="channel"    column="channel"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectRecruitResumeVo">
+        select resume_id, name, phone_number, email, sex, birth_date, age, job_intention, major, education, work_seniority, industry, monthly_salary, salary_structure, address, education_experience, work_experience, self_evaluation, create_time, resume_source, channel, create_by, status from recruit_resume
+    </sql>
+
+    <select id="selectRecruitResumeList" parameterType="RecruitResume" resultMap="RecruitResumeResult">
+        <include refid="selectRecruitResumeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="birthDate != null "> and birth_date = #{birthDate}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="jobIntention != null  and jobIntention != ''"> and job_intention = #{jobIntention}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="education != null  and education != ''"> and education = #{education}</if>
+            <if test="workSeniority != null  and workSeniority != ''"> and work_seniority = #{workSeniority}</if>
+            <if test="industry != null  and industry != ''"> and industry = #{industry}</if>
+            <if test="monthlySalary != null "> and monthly_salary = #{monthlySalary}</if>
+            <if test="salaryStructure != null  and salaryStructure != ''"> and salary_structure = #{salaryStructure}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="educationExperience != null "> and education_experience = #{educationExperience}</if>
+            <if test="workExperience != null "> and work_experience = #{workExperience}</if>
+            <if test="selfEvaluation != null  and selfEvaluation != ''"> and self_evaluation = #{selfEvaluation}</if>
+            <if test="resumeSource != null  and resumeSource != ''"> and resume_source = #{resumeSource}</if>
+            <if test="channel != null  and channel != ''"> and channel = #{channel}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectRecruitResumeById" parameterType="String" resultMap="RecruitResumeResult">
+        <include refid="selectRecruitResumeVo"/>
+        where resume_id = #{resumeId}
+    </select>
+        
+    <insert id="insertRecruitResume" parameterType="RecruitResume">
+        insert into recruit_resume
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resumeId != null  and resumeId != ''">resume_id,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">phone_number,</if>
+            <if test="email != null  and email != ''">email,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="birthDate != null ">birth_date,</if>
+            <if test="age != null ">age,</if>
+            <if test="jobIntention != null  and jobIntention != ''">job_intention,</if>
+            <if test="major != null  and major != ''">major,</if>
+            <if test="education != null  and education != ''">education,</if>
+            <if test="workSeniority != null  and workSeniority != ''">work_seniority,</if>
+            <if test="industry != null  and industry != ''">industry,</if>
+            <if test="monthlySalary != null ">monthly_salary,</if>
+            <if test="salaryStructure != null  and salaryStructure != ''">salary_structure,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="educationExperience != null ">education_experience,</if>
+            <if test="workExperience != null ">work_experience,</if>
+            <if test="selfEvaluation != null  and selfEvaluation != ''">self_evaluation,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="resumeSource != null  and resumeSource != ''">resume_source,</if>
+            <if test="channel != null  and channel != ''">channel,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="status != null  and status != ''">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resumeId != null  and resumeId != ''">#{resumeId},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">#{phoneNumber},</if>
+            <if test="email != null  and email != ''">#{email},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="birthDate != null ">#{birthDate},</if>
+            <if test="age != null ">#{age},</if>
+            <if test="jobIntention != null  and jobIntention != ''">#{jobIntention},</if>
+            <if test="major != null  and major != ''">#{major},</if>
+            <if test="education != null  and education != ''">#{education},</if>
+            <if test="workSeniority != null  and workSeniority != ''">#{workSeniority},</if>
+            <if test="industry != null  and industry != ''">#{industry},</if>
+            <if test="monthlySalary != null ">#{monthlySalary},</if>
+            <if test="salaryStructure != null  and salaryStructure != ''">#{salaryStructure},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="educationExperience != null ">#{educationExperience},</if>
+            <if test="workExperience != null ">#{workExperience},</if>
+            <if test="selfEvaluation != null  and selfEvaluation != ''">#{selfEvaluation},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="resumeSource != null  and resumeSource != ''">#{resumeSource},</if>
+            <if test="channel != null  and channel != ''">#{channel},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRecruitResume" parameterType="RecruitResume">
+        update recruit_resume
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="phoneNumber != null  and phoneNumber != ''">phone_number = #{phoneNumber},</if>
+            <if test="email != null  and email != ''">email = #{email},</if>
+            <if test="sex != null  and sex != ''">sex = #{sex},</if>
+            <if test="birthDate != null ">birth_date = #{birthDate},</if>
+            <if test="age != null ">age = #{age},</if>
+            <if test="jobIntention != null  and jobIntention != ''">job_intention = #{jobIntention},</if>
+            <if test="major != null  and major != ''">major = #{major},</if>
+            <if test="education != null  and education != ''">education = #{education},</if>
+            <if test="workSeniority != null  and workSeniority != ''">work_seniority = #{workSeniority},</if>
+            <if test="industry != null  and industry != ''">industry = #{industry},</if>
+            <if test="monthlySalary != null ">monthly_salary = #{monthlySalary},</if>
+            <if test="salaryStructure != null  and salaryStructure != ''">salary_structure = #{salaryStructure},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="educationExperience != null ">education_experience = #{educationExperience},</if>
+            <if test="workExperience != null ">work_experience = #{workExperience},</if>
+            <if test="selfEvaluation != null  and selfEvaluation != ''">self_evaluation = #{selfEvaluation},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="resumeSource != null  and resumeSource != ''">resume_source = #{resumeSource},</if>
+            <if test="channel != null  and channel != ''">channel = #{channel},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+        </trim>
+        where resume_id = #{resumeId}
+    </update>
+
+    <delete id="deleteRecruitResumeById" parameterType="String">
+        delete from recruit_resume where resume_id = #{resumeId}
+    </delete>
+
+    <delete id="deleteRecruitResumeByIds" parameterType="String">
+        delete from recruit_resume where resume_id in 
+        <foreach item="resumeId" collection="array" open="(" separator="," close=")">
+            #{resumeId}
+        </foreach>
+    </delete>
+    
+</mapper>

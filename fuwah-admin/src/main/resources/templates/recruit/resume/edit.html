@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改招聘简历')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-resume-edit" th:object="${recruitResume}">
+            <input name="resumeId" th:field="*{resumeId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input name="name" th:field="*{name}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">电话号码：</label>
+                <div class="col-sm-8">
+                    <input name="phoneNumber" th:field="*{phoneNumber}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">邮箱地址：</label>
+                <div class="col-sm-8">
+                    <input name="email" th:field="*{email}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">性别：</label>
+                <div class="col-sm-8">
+                    <select name="sex" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="birthDate" th:value="${#dates.format(recruitResume.birthDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">年龄：</label>
+                <div class="col-sm-8">
+                    <input name="age" th:field="*{age}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">求职意向：</label>
+                <div class="col-sm-8">
+                    <input name="jobIntention" th:field="*{jobIntention}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">专业：</label>
+                <div class="col-sm-8">
+                    <input name="major" th:field="*{major}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">学历：</label>
+                <div class="col-sm-8">
+                    <input name="education" th:field="*{education}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工作年限：</label>
+                <div class="col-sm-8">
+                    <input name="workSeniority" th:field="*{workSeniority}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">行业：</label>
+                <div class="col-sm-8">
+                    <select name="industry" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">期望月薪：</label>
+                <div class="col-sm-8">
+                    <input name="monthlySalary" th:field="*{monthlySalary}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">薪酬结构：</label>
+                <div class="col-sm-8">
+                    <input name="salaryStructure" th:field="*{salaryStructure}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">目前居住地址：</label>
+                <div class="col-sm-8">
+                    <input name="address" th:field="*{address}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">教育经历ID：</label>
+                <div class="col-sm-8">
+                    <input name="educationExperience" th:field="*{educationExperience}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">工作经历ID：</label>
+                <div class="col-sm-8">
+                    <input name="workExperience" th:field="*{workExperience}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">自我评价：</label>
+                <div class="col-sm-8">
+                    <textarea name="selfEvaluation" class="form-control">[[*{selfEvaluation}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">简历来源：</label>
+                <div class="col-sm-8">
+                    <select name="resumeSource" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">来源渠道：</label>
+                <div class="col-sm-8">
+                    <select name="channel" class="form-control m-b">
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">简历状态 [新创建；已邀请；面试中；面试通过；待入职；已入职；面试淘汰；已离职]：</label>
+                <div class="col-sm-8">
+                    <input name="status" th:field="*{status}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "recruit/resume";
+        $("#form-resume-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-resume-edit').serialize());
+            }
+        }
+
+        $("input[name='birthDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

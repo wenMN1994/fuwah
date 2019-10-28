@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>富华国际集团</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+    <th:block th:include="include :: header('百度ECharts')" />
+    <style>
+        .overview-1{
+            background-color: rgb(109,186,240);
+            color: #ffffff;
+        }
+        .overview-2{
+            background-color: rgb(93,235,221);
+            color: #ffffff;
+        }
+        .overview-3{
+            background-color: rgb(250,183,224);
+            color: #ffffff;
+        }
+        .backlog-quantity{
+            font-size: 20px;
+            font-weight: 800;
+            color: rgb(46,55,72);
+        }
+        .backlog-name{
+            font-size: 12px;
+            color: rgb(96,108,130);
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="widget p-lg text-center overview-1">
+                    <div class="m-b-md">
+                        <h1 class="m-xs">49</h1>
+                        <h3 class="font-bold no-margins">
+                            总员工
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="widget p-lg text-center overview-2">
+                    <div class="m-b-md">
+                        <h1 class="m-xs">47</h1>
+                        <h3 class="font-bold no-margins">
+                            正式
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="widget p-lg text-center overview-3">
+                    <div class="m-b-md">
+                        <h1 class="m-xs">2</h1>
+                        <h3 class="font-bold no-margins">
+                            试用
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="widget p-lg text-center overview-1">
+                    <div class="m-b-md">
+                        <h1 class="m-xs">0</h1>
+                        <h3 class="font-bold no-margins">
+                            本月新入职
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="widget p-lg text-center overview-2">
+                    <div class="m-b-md">
+                        <h1 class="m-xs">0</h1>
+                        <h3 class="font-bold no-margins">
+                            本月离职
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="widget bg p-lg text-center overview-3">
+                    <div class="m-b-md">
+                        <h1 class="m-xs">0</h1>
+                        <h3 class="font-bold no-margins">
+                            待入职员工
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 ><i class="fa fa-history"></i> 待办事项</h5>
+                        <div class="ibox-tools">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                                <span>全部<span style="color: #0d8ddb">（0）</span><i class="fa fa-sort-desc"></i></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <span class="backlog-quantity">0</span>
+                                        <br>
+                                        <span class="backlog-name">入职办理</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <span class="backlog-quantity">0</span>
+                                        <br>
+                                        <span class="backlog-name">离职办理</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <span class="backlog-quantity">0</span>
+                                        <br>
+                                        <span class="backlog-name">员工加入审核</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <span class="backlog-quantity">0</span>
+                                        <br>
+                                        <span class="backlog-name">入职未增员</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <span class="backlog-quantity">0</span>
+                                        <br>
+                                        <span class="backlog-name">离职未减员</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <span class="backlog-quantity">0</span>
+                                        <br>
+                                        <span class="backlog-name">离职办理</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><i class="fa fa-user-plus"></i> 招聘进度</h5>
+                        <div class="ibox-tools">
+                            <a>
+                                <i class="fa fa-gear"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        暂无招聘数据
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 ><i class="fa fa-calendar"></i> 工作日历</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><i class="fa fa-paper-plane-o"></i> 快捷功能入口</h5>
+                        <div class="ibox-tools">
+                            <a>
+                                <i class="fa fa-gear"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-users  fa-3x"></i>
+                                        <h2 class="backlog-name">用户管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-server  fa-3x"></i>
+                                        <h2 class="backlog-name">菜单管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-sitemap  fa-3x"></i>
+                                        <h2 class="backlog-name">部门管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-users  fa-3x"></i>
+                                        <h2 class="backlog-name">用户管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-server  fa-3x"></i>
+                                        <h2 class="backlog-name">菜单管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-sitemap  fa-3x"></i>
+                                        <h2 class="backlog-name">部门管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-users  fa-3x"></i>
+                                        <h2 class="backlog-name">用户管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-server  fa-3x"></i>
+                                        <h2 class="backlog-name">菜单管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa  fa-sitemap  fa-3x"></i>
+                                        <h2 class="backlog-name">部门管理</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 ><i class="fa fa-calendar-check-o"></i> 考勤统计</h5>
+                        <div class="ibox-tools">
+                            <a>
+                                <i class="fa fa-gear"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="echarts-pie-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5><i class="fa fa-users"></i> 入职人数统计</h5>
+                        <div class="ibox-tools">
+                            <a>
+                                <i class="fa fa fa-gear"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="echarts-bar-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="tabs-container">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 公司公告</a>
+                                </li>
+                                <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">系统公告</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="tab-1" class="tab-pane active">
+                                    <div class="panel-body">
+                                        暂无公司公告
+                                    </div>
+                                </div>
+                                <div id="tab-2" class="tab-pane">
+                                    <div class="panel-body">
+                                        暂无系统公告
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <p>
+                            <button type="button" class="btn btn-block btn-outline btn-success">期待您宝贵的意见</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:include="include :: echarts-js" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script type="text/javascript">
+	    $('#pay-qrcode').click(function(){
+	        var html=$(this).html();
+	        parent.layer.open({
+	            title: false,
+	            type: 1,
+	            closeBtn:false,
+	            shadeClose:true,
+	            area: ['600px', 'auto'],
+	            content: html
+	        });
+	    });
+
+        $(function () {
+            var pieChart = echarts.init(document.getElementById("echarts-pie-chart"));
+            var pieoption = {
+                title : {
+                    text: '出勤情况汇总',
+                    subtext: '',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient : 'vertical',
+                    x : 'left',
+                    data:['正常','迟到','早退','缺勤']
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'出勤情况',
+                        type:'pie',
+                        radius : '55%',
+                        center: ['50%', '60%'],
+                        data:[
+                            {value:99, name:'正常'},
+                            {value:10, name:'迟到'},
+                            {value:2, name:'早退'},
+                            {value:1, name:'缺勤'}
+                        ]
+                    }
+                ]
+            };
+            pieChart.setOption(pieoption);
+            $(window).resize(pieChart.resize);
+
+            var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
+            var baroption = {
+                title : {
+                    text: '年度入职人数'
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:'入职人数'
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'入职人数',
+                        type:'bar',
+                        data:[2, 4, 7, 3, 5, 7, 13, 16, 3, 2, 6, 3],
+                        markPoint : {
+                            data : [
+                                {type : 'max', name: '最大值'},
+                                {type : 'min', name: '最小值'}
+                            ]
+                        },
+                        markLine : {
+                            data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+                    }
+                ]
+            };
+            barChart.setOption(baroption);
+            window.onresize = barChart.resize;
+
+        });
+    </script>
+</body>
+</html>

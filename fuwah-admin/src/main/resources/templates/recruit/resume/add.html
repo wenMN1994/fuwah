@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增招聘简历')" />
+    <th:block th:include="include :: datetimepicker-css" />
+    <style>
+        .model-label{
+            width: 100%;
+            line-height:50px;
+            height: 50px;
+            margin-bottom: 10px;
+            background-color: rgba(242, 242, 242, 1);
+        }
+        .model-label label{
+            font-weight: 700;
+            font-style: normal;
+            text-align: left
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <form class="form-horizontal" id="form-resume-add">
+            <div style="margin: 50px 0px; font-size: 25px; font-weight: bold; text-align: center">
+                <span>个&nbsp;&nbsp; 人&nbsp;&nbsp; 简&nbsp;&nbsp; 历</span>
+            </div>
+            <div class="model-label">
+                <label>个人信息</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">姓名：</label>
+                        <div class="col-sm-8">
+                            <input name="name" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">联系电话：</label>
+                        <div class="col-sm-8">
+                            <input name="phoneNumber" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">性  别：</label>
+                        <div class="col-sm-8">
+                            <select name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">求职意向：</label>
+                        <div class="col-sm-8">
+                            <input name="jobIntention" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">邮箱地址：</label>
+                        <div class="col-sm-8">
+                            <input name="email" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">出生日期：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input name="birthDate" class="form-control" id="birthDate" placeholder="yyyy-MM-dd" type="text" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">年龄：</label>
+                        <div class="col-sm-8">
+                            <input name="age" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">期望月薪：</label>
+                        <div class="col-sm-8">
+                            <input name="monthlySalary" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">工作年限：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group m-b">
+                                <input name="workSeniority" class="form-control" type="text" required>
+                                <span class="input-group-addon">年</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">专业：</label>
+                        <div class="col-sm-8">
+                            <input name="major" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">学历：</label>
+                        <div class="col-sm-8">
+                            <select name="education" class="form-control m-b" th:with="type=${@dict.getType('recruit_resume_education')}">
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">薪酬结构：</label>
+                        <div class="col-sm-8">
+                            <input name="salaryStructure" class="form-control" type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">行业：</label>
+                        <div class="col-sm-8">
+                            <select name="industry" class="form-control m-b" th:with="type=${@dict.getType('recruit_resume_industry')}">
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">简历来源：</label>
+                        <div class="col-sm-8">
+                            <select name="resumeSource" class="form-control m-b" th:with="type=${@dict.getType('recruit_resume_source')}">
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">来源渠道：</label>
+                        <div class="col-sm-8">
+                            <select name="channel" class="form-control m-b" th:with="type=${@dict.getType('recruit_resume_channel')}">
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label">居住地址：</label>
+                <div class="col-sm-11">
+                    <input name="address" class="form-control" type="text" required>
+                </div>
+            </div>
+
+            <div class="model-label">
+                <label>教育经历</label>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">起止时间：</label>
+                        <div class="col-sm-8">
+                            <div class="input-daterange input-group">
+                                <input type="text" class="input-sm form-control" id="school-startTime" name="schoolStartTime" placeholder="yyyy-MM-dd"/>
+                                <span class="input-group-addon">到</span>
+                                <input type="text" class="input-sm form-control" id="school-endTime" name="schoolEndTime" placeholder="yyyy-MM-dd"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">毕业院校：</label>
+                        <div class="col-sm-8">
+                            <input name="schools" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">学历：</label>
+                        <div class="col-sm-8">
+                            <select name="schoolEducation" class="form-control m-b" th:with="type=${@dict.getType('recruit_resume_education')}">
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">专业：</label>
+                        <div class="col-sm-8">
+                            <input name="schoolMajor" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="model-label">
+                <label>工作经历</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">起止时间：</label>
+                        <div class="col-sm-8">
+                            <div class="input-daterange input-group">
+                                <input type="text" class="input-sm form-control" id="work-startTime" name="workStartTime" placeholder="yyyy-MM-dd"/>
+                                <span class="input-group-addon">到</span>
+                                <input type="text" class="input-sm form-control" id="work-endTime" name="workEndTime" placeholder="yyyy-MM-dd"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">工作单位：</label>
+                        <div class="col-sm-8">
+                            <input name="workUnit" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">职位：</label>
+                        <div class="col-sm-8">
+                            <input name="jobTitle" class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">工作内容：</label>
+                        <div class="col-sm-8">
+                            <textarea style="height: 100px" name="jobContent" class="form-control" placeholder="描述你的职责范围、工作任务及取得的成绩等"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="model-label">
+                <label>自我评价</label>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <textarea style="height: 100px" name="selfEvaluation" class="form-control" placeholder="简单评价自己"></textarea>
+                </div>
+            </div>
+
+            <div class="model-label">
+                <label>相关附件</label>
+            </div>
+        </form>
+    </div>
+
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>取消</button>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "recruit/resume"
+        $("#form-resume-add").validate({
+            onkeyup: false,
+            rules: {
+                name: {
+                    minlength: 2,
+                    maxlength: 20,
+                },
+                phoneNumber: {
+                    isPhone:true,
+                },
+                email:{
+                    email: true,
+                },
+                birthDate: {
+                    dateISO: true,
+                },
+                age: {
+                    digits: true,
+                },
+                monthlySalary: {
+                    digits: true,
+                },
+                workSeniority: {
+                    digits: true,
+                },
+            },
+            messages: {
+                dateISO: "请输入有效日期",
+            },
+            focusCleanup: true
+        });
+
+        //获取表单数据
+        function getData() {
+            var data = $("#form-resume-add").serializeArray();
+            return data;
+        }
+        function submitHandler() {
+            if ($.validate.form()) {
+                var data = getData();
+                $.operate.save(prefix + "/add", data);
+            }
+        }
+
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#birthDate'
+            });
+
+            var schoolStartDate = laydate.render({
+                elem: '#school-startTime',
+                max: $('#school-endTime').val(),
+                theme: 'molv',
+                trigger: 'click',
+                done: function(value, date) {
+                    // 结束时间大于开始时间
+                    if (value !== '') {
+                        schoolEndDate.config.min.year = date.year;
+                        schoolEndDate.config.min.month = date.month - 1;
+                        schoolEndDate.config.min.date = date.date;
+                    } else {
+                        schoolEndDate.config.min.year = '';
+                        schoolEndDate.config.min.month = '';
+                        schoolEndDate.config.min.date = '';
+                    }
+                }
+            });
+            var schoolEndDate = laydate.render({
+                elem: '#school-endTime',
+                min: $('#school-startTime').val(),
+                theme: 'molv',
+                trigger: 'click',
+                done: function(value, date) {
+                    // 开始时间小于结束时间
+                    if (value !== '') {
+                        schoolStartDate.config.max.year = date.year;
+                        schoolStartDate.config.max.month = date.month - 1;
+                        schoolStartDate.config.max.date = date.date;
+                    } else {
+                        schoolStartDate.config.max.year = '';
+                        schoolStartDate.config.max.month = '';
+                        schoolStartDate.config.max.date = '';
+                    }
+                }
+            });
+
+            var workStartDate = laydate.render({
+                elem: '#work-startTime',
+                max: $('#work-endTime').val(),
+                theme: 'molv',
+                trigger: 'click',
+                done: function(value, date) {
+                    // 结束时间大于开始时间
+                    if (value !== '') {
+                        workEndDate.config.min.year = date.year;
+                        workEndDate.config.min.month = date.month - 1;
+                        workEndDate.config.min.date = date.date;
+                    } else {
+                        workEndDate.config.min.year = '';
+                        workEndDate.config.min.month = '';
+                        workEndDate.config.min.date = '';
+                    }
+                }
+            });
+            var workEndDate = laydate.render({
+                elem: '#work-endTime',
+                min: $('#work-startTime').val(),
+                theme: 'molv',
+                trigger: 'click',
+                done: function(value, date) {
+                    // 开始时间小于结束时间
+                    if (value !== '') {
+                        workStartDate.config.max.year = date.year;
+                        workStartDate.config.max.month = date.month - 1;
+                        workStartDate.config.max.date = date.date;
+                    } else {
+                        workStartDate.config.max.year = '';
+                        workStartDate.config.max.month = '';
+                        workStartDate.config.max.date = '';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

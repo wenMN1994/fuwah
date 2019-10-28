@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuwah.recruit.mapper.RecruitResumeWeMapper">
+    
+    <resultMap type="RecruitResumeWe" id="RecruitResumeWeResult">
+        <result property="id"    column="id"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="workUnit"    column="work_unit"    />
+        <result property="jobTitle"    column="job_title"    />
+        <result property="jobContent"    column="job_content"    />
+    </resultMap>
+
+    <sql id="selectRecruitResumeWeVo">
+        select id, start_time, end_time, work_unit, job_title, job_content from recruit_resume_we
+    </sql>
+
+    <select id="selectRecruitResumeWeList" parameterType="RecruitResumeWe" resultMap="RecruitResumeWeResult">
+        <include refid="selectRecruitResumeWeVo"/>
+        <where>  
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="workUnit != null  and workUnit != ''"> and work_unit = #{workUnit}</if>
+            <if test="jobTitle != null  and jobTitle != ''"> and job_title = #{jobTitle}</if>
+            <if test="jobContent != null  and jobContent != ''"> and job_content = #{jobContent}</if>
+        </where>
+    </select>
+    
+    <select id="selectRecruitResumeWeById" parameterType="Long" resultMap="RecruitResumeWeResult">
+        <include refid="selectRecruitResumeWeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertRecruitResumeWe" parameterType="RecruitResumeWe" useGeneratedKeys="true" keyProperty="id">
+        insert into recruit_resume_we
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="startTime != null ">start_time,</if>
+            <if test="endTime != null ">end_time,</if>
+            <if test="workUnit != null  and workUnit != ''">work_unit,</if>
+            <if test="jobTitle != null  and jobTitle != ''">job_title,</if>
+            <if test="jobContent != null  and jobContent != ''">job_content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="startTime != null ">#{startTime},</if>
+            <if test="endTime != null ">#{endTime},</if>
+            <if test="workUnit != null  and workUnit != ''">#{workUnit},</if>
+            <if test="jobTitle != null  and jobTitle != ''">#{jobTitle},</if>
+            <if test="jobContent != null  and jobContent != ''">#{jobContent},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRecruitResumeWe" parameterType="RecruitResumeWe">
+        update recruit_resume_we
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="startTime != null ">start_time = #{startTime},</if>
+            <if test="endTime != null ">end_time = #{endTime},</if>
+            <if test="workUnit != null  and workUnit != ''">work_unit = #{workUnit},</if>
+            <if test="jobTitle != null  and jobTitle != ''">job_title = #{jobTitle},</if>
+            <if test="jobContent != null  and jobContent != ''">job_content = #{jobContent},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRecruitResumeWeById" parameterType="Long">
+        delete from recruit_resume_we where id = #{id}
+    </delete>
+
+    <delete id="deleteRecruitResumeWeByIds" parameterType="String">
+        delete from recruit_resume_we where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

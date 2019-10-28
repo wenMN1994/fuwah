@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fuwah.recruit.mapper.RecruitResumeEeMapper">
+    
+    <resultMap type="RecruitResumeEe" id="RecruitResumeEeResult">
+        <result property="id"    column="id"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="schools"    column="schools"    />
+        <result property="schoolEducation"    column="school_education"    />
+        <result property="schoolMajor"    column="school_major"    />
+    </resultMap>
+
+    <sql id="selectRecruitResumeEeVo">
+        select id, start_time, end_time, schools, school_education, school_major from recruit_resume_ee
+    </sql>
+
+    <select id="selectRecruitResumeEeList" parameterType="RecruitResumeEe" resultMap="RecruitResumeEeResult">
+        <include refid="selectRecruitResumeEeVo"/>
+        <where>  
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="schools != null  and schools != ''"> and schools = #{schools}</if>
+            <if test="schoolEducation != null  and schoolEducation != ''"> and school_education = #{schoolEducation}</if>
+            <if test="schoolMajor != null  and schoolMajor != ''"> and school_major = #{schoolMajor}</if>
+        </where>
+    </select>
+    
+    <select id="selectRecruitResumeEeById" parameterType="Long" resultMap="RecruitResumeEeResult">
+        <include refid="selectRecruitResumeEeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertRecruitResumeEe" parameterType="RecruitResumeEe" useGeneratedKeys="true" keyProperty="id">
+        insert into recruit_resume_ee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="startTime != null ">start_time,</if>
+            <if test="endTime != null ">end_time,</if>
+            <if test="schools != null  and schools != ''">schools,</if>
+            <if test="schoolEducation != null  and schoolEducation != ''">school_education,</if>
+            <if test="schoolMajor != null  and schoolMajor != ''">school_major,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="startTime != null ">#{startTime},</if>
+            <if test="endTime != null ">#{endTime},</if>
+            <if test="schools != null  and schools != ''">#{schools},</if>
+            <if test="schoolEducation != null  and schoolEducation != ''">#{schoolEducation},</if>
+            <if test="schoolMajor != null  and schoolMajor != ''">#{schoolMajor},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRecruitResumeEe" parameterType="RecruitResumeEe">
+        update recruit_resume_ee
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="startTime != null ">start_time = #{startTime},</if>
+            <if test="endTime != null ">end_time = #{endTime},</if>
+            <if test="schools != null  and schools != ''">schools = #{schools},</if>
+            <if test="schoolEducation != null  and schoolEducation != ''">school_education = #{schoolEducation},</if>
+            <if test="schoolMajor != null  and schoolMajor != ''">school_major = #{schoolMajor},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRecruitResumeEeById" parameterType="Long">
+        delete from recruit_resume_ee where id = #{id}
+    </delete>
+
+    <delete id="deleteRecruitResumeEeByIds" parameterType="String">
+        delete from recruit_resume_ee where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
