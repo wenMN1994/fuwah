@@ -1,6 +1,7 @@
 package com.fuwah.generator.util;
 
 import java.util.Arrays;
+import org.apache.commons.lang3.RegExUtils;
 import com.fuwah.common.constant.GenConstants;
 import com.fuwah.common.utils.StringUtils;
 import com.fuwah.generator.config.GenConfig;
@@ -179,7 +180,7 @@ public class GenUtils
      */
     public static String replaceText(String text)
     {
-        return text.replaceAll("(?:表|若依)", "");
+        return RegExUtils.replaceAll(text, "(?:表|富华)", "");
     }
 
     /**
