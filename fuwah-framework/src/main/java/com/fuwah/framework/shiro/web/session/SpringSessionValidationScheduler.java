@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import com.fuwah.common.utils.Threads;
 
@@ -38,6 +39,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
      * 会话验证管理器
      */
     @Autowired
+    @Lazy
     @Qualifier("sessionManager")
     private ValidatingSessionManager sessionManager;
 
