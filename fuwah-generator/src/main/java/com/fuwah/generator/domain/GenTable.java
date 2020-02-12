@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import com.fuwah.common.constant.GenConstants;
 import com.fuwah.common.core.domain.BaseEntity;
 import com.fuwah.common.utils.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 业务表 gen_table
@@ -262,7 +263,8 @@ public class GenTable extends BaseEntity
     {
         if (isTree(tplCategory))
         {
-            StringUtils.equalsAnyIgnoreCase(javaField, GenConstants.TREE_ENTITY);
+            return StringUtils.equalsAnyIgnoreCase(javaField,
+                    ArrayUtils.addAll(GenConstants.TREE_ENTITY, GenConstants.BASE_ENTITY));
         }
         return StringUtils.equalsAnyIgnoreCase(javaField, GenConstants.BASE_ENTITY);
     }
