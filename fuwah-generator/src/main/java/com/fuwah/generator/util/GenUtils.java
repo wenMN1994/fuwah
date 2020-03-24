@@ -166,10 +166,30 @@ public class GenUtils
         if (autoRemovePre && StringUtils.isNotEmpty(tablePrefix))
         {
             String[] searchList = StringUtils.split(tablePrefix, ",");
-            String[] replacementList = emptyList(searchList.length);
-            tableName = StringUtils.replaceEach(tableName, searchList, replacementList);
+            tableName = replaceFirst(tableName, searchList);
         }
         return StringUtils.convertToCamelCase(tableName);
+    }
+
+    /**
+     * 批量替换前缀
+     *
+     * @param replacementm 替换值
+     * @param searchList 替换列表
+     * @return
+     */
+    public static String replaceFirst(String replacementm, String[] searchList)
+    {
+        String text = replacementm;
+        for (String searchString : searchList)
+        {
+            if (replacementm.startsWith(searchString))
+            {
+                text = replacementm.replaceFirst(searchString, "");
+                break;
+            }
+        }
+        return text;
     }
 
     /**
@@ -178,9 +198,9 @@ public class GenUtils
      * @param name 需要被替换的名字
      * @return 替换后的名字
      */
-    public static String replaceText(String text)
+    public static String replaceText(String name)
     {
-        return RegExUtils.replaceAll(text, "(?:表|富华)", "");
+        return RegExUtils.replaceAll(name, "(?:表|富华)", "");
     }
 
     /**
