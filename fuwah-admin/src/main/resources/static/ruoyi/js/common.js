@@ -11,7 +11,12 @@ $(function() {
 		    skin: 'layer-ext-moon'
 		});
 	}
-	
+
+	// 回到顶部绑定
+	if ($.fn.toTop !== undefined) {
+		$('#scroll-up').toTop();
+	}
+
 	// select2复选框事件绑定
 	if ($.fn.select2 !== undefined) {
         $.fn.select2.defaults.set( "theme", "bootstrap" );
