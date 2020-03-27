@@ -1,6 +1,8 @@
 package com.fuwah.framework.web.service;
 
 import java.util.List;
+
+import com.fuwah.system.service.ISysDictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fuwah.system.domain.SysDictData;
@@ -12,8 +14,11 @@ import com.fuwah.system.service.ISysDictDataService;
  * @author fuwah
  */
 @Service("dict")
-public class DictService
-{
+public class DictService {
+
+    @Autowired
+    private ISysDictTypeService dictTypeService;
+
     @Autowired
     private ISysDictDataService dictDataService;
 
@@ -25,7 +30,7 @@ public class DictService
      */
     public List<SysDictData> getType(String dictType)
     {
-        return dictDataService.selectDictDataByType(dictType);
+        return dictTypeService.selectDictDataByType(dictType);
     }
 
     /**
