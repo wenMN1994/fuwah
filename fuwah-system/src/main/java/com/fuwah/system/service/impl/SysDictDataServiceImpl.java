@@ -2,7 +2,7 @@ package com.fuwah.system.service.impl;
 
 import java.util.List;
 
-import com.fuwah.utils.DictUtils;
+import com.fuwah.system.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fuwah.common.core.text.Convert;

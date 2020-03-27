@@ -213,6 +213,7 @@
 		<module>fuwah-quartz</module>
 		<module>fuwah-generator</module>
         <module>fuwah-common</module>
+        <module>fuwah-hr-system</module>
     </modules>
     <packaging>pom</packaging>
 

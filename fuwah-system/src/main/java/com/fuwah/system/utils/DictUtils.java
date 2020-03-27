@@ -1,4 +1,4 @@
-package com.fuwah.utils;
+package com.fuwah.system.utils;
 
 import com.fuwah.common.constant.Constants;
 import com.fuwah.common.utils.CacheUtils;

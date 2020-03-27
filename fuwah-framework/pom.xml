@@ -77,6 +77,13 @@
 			<artifactId>fuwah-system</artifactId>
 		</dependency>
 
+		<!-- HR 系统模块 -->
+		<dependency>
+			<groupId>com.fuwah</groupId>
+			<artifactId>fuwah-hr-system</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+
 		<!-- 获取系统信息 -->
 		<dependency>
 			<groupId>com.github.oshi</groupId>
