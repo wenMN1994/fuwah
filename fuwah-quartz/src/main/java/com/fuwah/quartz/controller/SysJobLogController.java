@@ -1,15 +1,15 @@
 package com.fuwah.quartz.controller;
 
 import java.util.List;
+
+import com.fuwah.common.utils.StringUtils;
+import com.fuwah.quartz.domain.SysJob;
+import com.fuwah.quartz.service.ISysJobService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.fuwah.common.annotation.Log;
 import com.fuwah.common.core.controller.BaseController;
 import com.fuwah.common.core.domain.AjaxResult;
@@ -31,12 +31,20 @@ public class SysJobLogController extends BaseController
     private String prefix = "monitor/job";
 
     @Autowired
+    private ISysJobService jobService;
+
+    @Autowired
     private ISysJobLogService jobLogService;
 
     @RequiresPermissions("monitor:job:view")
     @GetMapping()
-    public String jobLog()
+    public String jobLog(@RequestParam(value = "jobId", required = false) Long jobId, ModelMap mmap)
     {
+        if (StringUtils.isNotNull(jobId))
+        {
+            SysJob job = jobService.selectJobById(jobId);
+            mmap.put("job", job);
+        }
         return prefix + "/jobLog";
     }
 

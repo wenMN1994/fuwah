@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>fuwah</artifactId>
 		<groupId>com.fuwah</groupId>
-		<version>4.1.0</version>
+		<version>4.2.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -81,7 +81,7 @@
 		<dependency>
 			<groupId>com.fuwah</groupId>
 			<artifactId>fuwah-hr-system</artifactId>
-			<version>4.1.0</version>
+			<version>4.2.0</version>
 		</dependency>
 
 		<!-- 获取系统信息 -->

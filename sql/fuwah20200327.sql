@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 23/11/2019 22:58:57
+ Date: 27/03/2020 23:41:27
 */
 
 SET NAMES utf8mb4;
@@ -211,7 +211,7 @@ CREATE TABLE `qrtz_scheduler_state`  (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('FuWahScheduler', 'LAPTOP-GHVKEMRU1574347019518', 1574347128916, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('FuWahScheduler', 'LAPTOP-GHVKEMRU1585299683265', 1585301352974, 15000);
 INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'LAPTOP-GHVKEMRU1571756264961', 1571756614343, 15000);
 
 -- ----------------------------
@@ -281,9 +281,9 @@ CREATE TABLE `qrtz_triggers`  (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1574347020000, -1, 5, 'PAUSED', 'CRON', 1574347019000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1574347020000, -1, 5, 'PAUSED', 'CRON', 1574347019000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1574347020000, -1, 5, 'PAUSED', 'CRON', 1574347020000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1585299690000, -1, 5, 'PAUSED', 'CRON', 1585299683000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1585299690000, -1, 5, 'PAUSED', 'CRON', 1585299683000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1585299700000, -1, 5, 'PAUSED', 'CRON', 1585299683000, 0, NULL, 2, '');
 INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1571756270000, -1, 5, 'PAUSED', 'CRON', 1571756265000, 0, NULL, 2, '');
 INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1571756265000, -1, 5, 'PAUSED', 'CRON', 1571756265000, 0, NULL, 2, '');
 INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1571756280000, -1, 5, 'PAUSED', 'CRON', 1571756265000, 0, NULL, 2, '');
@@ -361,7 +361,7 @@ CREATE TABLE `sys_config`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -369,6 +369,7 @@ CREATE TABLE `sys_config`  (
 INSERT INTO `sys_config` VALUES (1, '主框架页-默认皮肤样式名称', 'sys.index.skinName', 'skin-blue', 'Y', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow');
 INSERT INTO `sys_config` VALUES (2, '用户管理-账号初始密码', 'sys.user.initPassword', '123456', 'Y', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '初始化密码 123456');
 INSERT INTO `sys_config` VALUES (3, '主框架页-侧边栏主题', 'sys.index.sideTheme', 'theme-dark', 'Y', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '深色主题theme-dark，浅蓝主题theme-light');
+INSERT INTO `sys_config` VALUES (4, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'false', 'Y', 'admin', '2018-03-16 11:33:00', 'admin', '2020-03-27 17:28:49', '是否开启注册用户功能');
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -426,7 +427,7 @@ CREATE TABLE `sys_dict_data`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -487,6 +488,7 @@ INSERT INTO `sys_dict_data` VALUES (53, 3, '58同城', '2', 'recruit_resume_chan
 INSERT INTO `sys_dict_data` VALUES (54, 4, '拉勾网', '3', 'recruit_resume_channel', NULL, NULL, 'N', '0', 'admin', '2019-10-26 18:50:16', '', NULL, '简历来源渠道-拉勾网');
 INSERT INTO `sys_dict_data` VALUES (55, 5, '猎聘网', '4', 'recruit_resume_channel', NULL, NULL, 'N', '0', 'admin', '2019-10-26 18:50:46', '', NULL, '简历来源渠道-猎聘网');
 INSERT INTO `sys_dict_data` VALUES (56, 6, '内部推荐', '5', 'recruit_resume_channel', NULL, NULL, 'N', '0', 'admin', '2019-10-26 18:51:12', '', NULL, '简历来源渠道-内部推荐');
+INSERT INTO `sys_dict_data` VALUES (57, 0, '其他', '0', 'sys_oper_type', '', 'info', 'Y', '0', 'admin', '2020-03-27 17:14:58', 'admin', '2020-03-27 17:24:29', '其他操作');
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -583,7 +585,7 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '提示消息',
   `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 181 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 211 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -669,6 +671,36 @@ INSERT INTO `sys_logininfor` VALUES (177, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (178, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-11-13 22:46:46');
 INSERT INTO `sys_logininfor` VALUES (179, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-11-21 22:21:46');
 INSERT INTO `sys_logininfor` VALUES (180, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-11-21 22:37:34');
+INSERT INTO `sys_logininfor` VALUES (181, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-11-23 23:02:58');
+INSERT INTO `sys_logininfor` VALUES (182, 'admin', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', '0', '登录成功', '2019-12-02 21:59:44');
+INSERT INTO `sys_logininfor` VALUES (183, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2019-12-13 21:29:07');
+INSERT INTO `sys_logininfor` VALUES (184, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2019-12-13 21:29:12');
+INSERT INTO `sys_logininfor` VALUES (185, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2019-12-13 21:29:57');
+INSERT INTO `sys_logininfor` VALUES (186, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2019-12-13 21:30:08');
+INSERT INTO `sys_logininfor` VALUES (187, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2019-12-23 21:51:08');
+INSERT INTO `sys_logininfor` VALUES (188, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2019-12-23 21:58:34');
+INSERT INTO `sys_logininfor` VALUES (189, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2019-12-23 21:58:39');
+INSERT INTO `sys_logininfor` VALUES (190, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2019-12-23 21:58:43');
+INSERT INTO `sys_logininfor` VALUES (191, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2019-12-23 22:03:51');
+INSERT INTO `sys_logininfor` VALUES (192, 'admin', '127.0.0.1', '内网IP', 'Firefox 7', 'Windows 10', '0', '登录成功', '2019-12-23 22:06:37');
+INSERT INTO `sys_logininfor` VALUES (193, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-01-02 22:33:45');
+INSERT INTO `sys_logininfor` VALUES (194, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-01-12 21:25:33');
+INSERT INTO `sys_logininfor` VALUES (195, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-02-12 23:25:33');
+INSERT INTO `sys_logininfor` VALUES (196, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-02-14 15:47:28');
+INSERT INTO `sys_logininfor` VALUES (197, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-02-24 17:27:19');
+INSERT INTO `sys_logininfor` VALUES (198, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-24 22:46:43');
+INSERT INTO `sys_logininfor` VALUES (199, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 11:57:01');
+INSERT INTO `sys_logininfor` VALUES (200, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 12:33:57');
+INSERT INTO `sys_logininfor` VALUES (201, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 13:26:54');
+INSERT INTO `sys_logininfor` VALUES (202, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2020-03-27 14:00:03');
+INSERT INTO `sys_logininfor` VALUES (203, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 14:00:07');
+INSERT INTO `sys_logininfor` VALUES (204, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 14:27:40');
+INSERT INTO `sys_logininfor` VALUES (205, 'admin', '127.0.0.1', '内网IP', 'Firefox 7', 'Windows 10', '0', '登录成功', '2020-03-27 14:48:14');
+INSERT INTO `sys_logininfor` VALUES (206, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 14:58:03');
+INSERT INTO `sys_logininfor` VALUES (207, 'admin', '127.0.0.1', '内网IP', 'Firefox 7', 'Windows 10', '0', '登录成功', '2020-03-27 14:59:00');
+INSERT INTO `sys_logininfor` VALUES (208, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 17:01:45');
+INSERT INTO `sys_logininfor` VALUES (209, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 17:22:55');
+INSERT INTO `sys_logininfor` VALUES (210, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-03-27 17:26:21');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -841,7 +873,7 @@ CREATE TABLE `sys_oper_log`  (
   `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 125 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -970,6 +1002,19 @@ INSERT INTO `sys_oper_log` VALUES (121, '招聘简历', 1, 'com.fuwah.web.contro
 INSERT INTO `sys_oper_log` VALUES (122, '代码生成', 3, 'com.fuwah.generator.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\r\n  \"ids\" : [ \"16\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2019-11-13 22:47:49');
 INSERT INTO `sys_oper_log` VALUES (123, '代码生成', 3, 'com.fuwah.generator.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\r\n  \"ids\" : [ \"17\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2019-11-13 22:47:51');
 INSERT INTO `sys_oper_log` VALUES (124, '代码生成', 3, 'com.fuwah.generator.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\r\n  \"ids\" : [ \"18\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2019-11-13 22:47:53');
+INSERT INTO `sys_oper_log` VALUES (125, '用户管理', 5, 'com.fuwah.web.controller.system.SysUserController.export()', 'POST', 1, 'admin', '研发部门', '/system/user/export', '127.0.0.1', '内网IP', '{\r\n  \"deptId\" : [ \"\" ],\r\n  \"parentId\" : [ \"\" ],\r\n  \"loginName\" : [ \"\" ],\r\n  \"phonenumber\" : [ \"\" ],\r\n  \"status\" : [ \"\" ],\r\n  \"params[beginTime]\" : [ \"\" ],\r\n  \"params[endTime]\" : [ \"\" ],\r\n  \"orderByColumn\" : [ \"createTime\" ],\r\n  \"isAsc\" : [ \"desc\" ]\r\n}', '{\r\n  \"msg\" : \"1baa3a4d-9e7d-4963-8f5f-8899a34049e3_用户数据.xlsx\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-02-24 17:28:07');
+INSERT INTO `sys_oper_log` VALUES (126, '字典类型', 9, 'com.fuwah.web.controller.system.SysDictTypeController.clearCache()', 'GET', 1, 'admin', '研发部门', '/system/dict/clearCache', '127.0.0.1', '内网IP', '{ }', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 11:57:57');
+INSERT INTO `sys_oper_log` VALUES (127, '字典数据', 1, 'com.fuwah.web.controller.system.SysDictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\r\n  \"dictLabel\" : [ \"其他\" ],\r\n  \"dictValue\" : [ \"0\" ],\r\n  \"dictType\" : [ \"sys_oper_type\" ],\r\n  \"cssClass\" : [ \"\" ],\r\n  \"dictSort\" : [ \"99\" ],\r\n  \"listClass\" : [ \"info\" ],\r\n  \"isDefault\" : [ \"Y\" ],\r\n  \"status\" : [ \"0\" ],\r\n  \"remark\" : [ \"其他操作\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:14:58');
+INSERT INTO `sys_oper_log` VALUES (128, '字典数据', 2, 'com.fuwah.web.controller.system.SysDictDataController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/edit', '127.0.0.1', '内网IP', '{\r\n  \"dictCode\" : [ \"57\" ],\r\n  \"dictLabel\" : [ \"其他\" ],\r\n  \"dictValue\" : [ \"0\" ],\r\n  \"dictType\" : [ \"sys_oper_type\" ],\r\n  \"cssClass\" : [ \"\" ],\r\n  \"dictSort\" : [ \"10\" ],\r\n  \"listClass\" : [ \"info\" ],\r\n  \"isDefault\" : [ \"Y\" ],\r\n  \"status\" : [ \"0\" ],\r\n  \"remark\" : [ \"其他操作\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:15:36');
+INSERT INTO `sys_oper_log` VALUES (129, '字典数据', 2, 'com.fuwah.web.controller.system.SysDictDataController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/edit', '127.0.0.1', '内网IP', '{\r\n  \"dictCode\" : [ \"57\" ],\r\n  \"dictLabel\" : [ \"其他\" ],\r\n  \"dictValue\" : [ \"0\" ],\r\n  \"dictType\" : [ \"sys_oper_type\" ],\r\n  \"cssClass\" : [ \"\" ],\r\n  \"dictSort\" : [ \"99\" ],\r\n  \"listClass\" : [ \"info\" ],\r\n  \"isDefault\" : [ \"Y\" ],\r\n  \"status\" : [ \"0\" ],\r\n  \"remark\" : [ \"其他操作\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:23:31');
+INSERT INTO `sys_oper_log` VALUES (130, '字典数据', 2, 'com.fuwah.web.controller.system.SysDictDataController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/edit', '127.0.0.1', '内网IP', '{\r\n  \"dictCode\" : [ \"57\" ],\r\n  \"dictLabel\" : [ \"其他\" ],\r\n  \"dictValue\" : [ \"0\" ],\r\n  \"dictType\" : [ \"sys_oper_type\" ],\r\n  \"cssClass\" : [ \"\" ],\r\n  \"dictSort\" : [ \"10\" ],\r\n  \"listClass\" : [ \"info\" ],\r\n  \"isDefault\" : [ \"Y\" ],\r\n  \"status\" : [ \"0\" ],\r\n  \"remark\" : [ \"其他操作\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:23:44');
+INSERT INTO `sys_oper_log` VALUES (131, '字典数据', 2, 'com.fuwah.web.controller.system.SysDictDataController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/edit', '127.0.0.1', '内网IP', '{\r\n  \"dictCode\" : [ \"57\" ],\r\n  \"dictLabel\" : [ \"其他\" ],\r\n  \"dictValue\" : [ \"0\" ],\r\n  \"dictType\" : [ \"sys_oper_type\" ],\r\n  \"cssClass\" : [ \"\" ],\r\n  \"dictSort\" : [ \"0\" ],\r\n  \"listClass\" : [ \"info\" ],\r\n  \"isDefault\" : [ \"Y\" ],\r\n  \"status\" : [ \"0\" ],\r\n  \"remark\" : [ \"其他操作\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:23:51');
+INSERT INTO `sys_oper_log` VALUES (132, '字典数据', 2, 'com.fuwah.web.controller.system.SysDictDataController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/edit', '127.0.0.1', '内网IP', '{\r\n  \"dictCode\" : [ \"57\" ],\r\n  \"dictLabel\" : [ \"其他\" ],\r\n  \"dictValue\" : [ \"0\" ],\r\n  \"dictType\" : [ \"sys_oper_type\" ],\r\n  \"cssClass\" : [ \"\" ],\r\n  \"dictSort\" : [ \"0\" ],\r\n  \"listClass\" : [ \"info\" ],\r\n  \"isDefault\" : [ \"Y\" ],\r\n  \"status\" : [ \"0\" ],\r\n  \"remark\" : [ \"其他操作\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:24:29');
+INSERT INTO `sys_oper_log` VALUES (133, '字典类型', 9, 'com.fuwah.web.controller.system.SysDictTypeController.clearCache()', 'GET', 1, 'admin', '研发部门', '/system/dict/clearCache', '127.0.0.1', '内网IP', '{ }', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:24:38');
+INSERT INTO `sys_oper_log` VALUES (134, '参数管理', 9, 'com.fuwah.web.controller.system.SysConfigController.clearCache()', 'GET', 1, 'admin', '研发部门', '/system/config/clearCache', '127.0.0.1', '内网IP', '{ }', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:28:31');
+INSERT INTO `sys_oper_log` VALUES (135, '参数管理', 2, 'com.fuwah.web.controller.system.SysConfigController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/config/edit', '127.0.0.1', '内网IP', '{\r\n  \"configId\" : [ \"4\" ],\r\n  \"configName\" : [ \"账号自助-是否开启用户注册功能\" ],\r\n  \"configKey\" : [ \"sys.account.registerUser\" ],\r\n  \"configValue\" : [ \"false\" ],\r\n  \"configType\" : [ \"Y\" ],\r\n  \"remark\" : [ \"是否开启注册用户\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:28:44');
+INSERT INTO `sys_oper_log` VALUES (136, '参数管理', 2, 'com.fuwah.web.controller.system.SysConfigController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/config/edit', '127.0.0.1', '内网IP', '{\r\n  \"configId\" : [ \"4\" ],\r\n  \"configName\" : [ \"账号自助-是否开启用户注册功能\" ],\r\n  \"configKey\" : [ \"sys.account.registerUser\" ],\r\n  \"configValue\" : [ \"false\" ],\r\n  \"configType\" : [ \"Y\" ],\r\n  \"remark\" : [ \"是否开启注册用户功能\" ]\r\n}', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:28:49');
+INSERT INTO `sys_oper_log` VALUES (137, '参数管理', 9, 'com.fuwah.web.controller.system.SysConfigController.clearCache()', 'GET', 1, 'admin', '研发部门', '/system/config/clearCache', '127.0.0.1', '内网IP', '{ }', '{\r\n  \"msg\" : \"操作成功\",\r\n  \"code\" : 0\r\n}', 0, NULL, '2020-03-27 17:28:56');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1168,7 +1213,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', 'admin', '00', 'admin@fuwah.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2019-11-21 22:37:35', 'admin', '2018-03-16 11:33:00', 'fuwah', '2019-11-21 22:37:35', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', 'admin', '00', 'admin@fuwah.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2020-03-27 17:26:21', 'admin', '2018-03-16 11:33:00', 'fuwah', '2020-03-27 17:26:21', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'fuwah', '富华', '00', 'fuwah@fuwah.com', '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', 'admin', '2019-10-24 20:56:46', '测试员');
 
 -- ----------------------------
@@ -1193,8 +1238,9 @@ CREATE TABLE `sys_user_online`  (
 -- ----------------------------
 -- Records of sys_user_online
 -- ----------------------------
-INSERT INTO `sys_user_online` VALUES ('0b70a98b-0b4e-4960-bf5b-1a6ca44721d7', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', 'on_line', '2019-11-21 22:21:38', '2019-11-21 22:25:58', 1800000);
-INSERT INTO `sys_user_online` VALUES ('e8b7ce72-b315-4204-8c53-2514c85eb9a3', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome', 'Windows 10', 'on_line', '2019-11-21 22:37:31', '2019-11-21 22:38:35', 1800000);
+INSERT INTO `sys_user_online` VALUES ('269356b1-b5a0-45be-9238-9842ab2ecfb4', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2020-03-27 17:22:47', '2020-03-27 17:23:56', 1800000);
+INSERT INTO `sys_user_online` VALUES ('97d8aeec-e377-4fcc-aaef-5716a6f7336e', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2020-03-27 17:01:39', '2020-03-27 17:14:59', 1800000);
+INSERT INTO `sys_user_online` VALUES ('a4274cee-74e6-41d0-ab74-8c34e97ed024', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2020-03-27 17:26:18', '2020-03-27 17:28:38', 1800000);
 
 -- ----------------------------
 -- Table structure for sys_user_post
