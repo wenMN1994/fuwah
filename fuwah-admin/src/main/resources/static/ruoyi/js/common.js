@@ -54,6 +54,11 @@ $(function() {
 		}, 100);
 	});
 
+	// 取消回车自动提交表单
+	$(document).on("keypress", "form", function(event) {
+		return event.keyCode != 13;
+	});
+
 	// laydate 时间控件绑定
 	if ($(".select-time").length > 0) {
 		layui.use('laydate', function() {
