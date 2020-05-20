@@ -16,6 +16,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import com.fuwah.common.constant.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +39,19 @@ public class HttpUtils
      */
     public static String sendGet(String url, String param)
     {
+        return sendGet(url, param, Constants.UTF8);
+    }
+
+    /**
+     * 向指定 URL 发送GET方法的请求
+     *
+     * @param url 发送请求的 URL
+     * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
+     * @param contentType 编码类型
+     * @return 所代表远程资源的响应结果
+     */
+    public static String sendGet(String url, String param, String contentType)
+    {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try
@@ -49,7 +64,7 @@ public class HttpUtils
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             connection.connect();
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "GBK"));
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream(), contentType));
             String line;
             while ((line = in.readLine()) != null)
             {
