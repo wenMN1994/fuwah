@@ -1,10 +1,10 @@
 package com.fuwah.common.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fuwah.common.config.Global;
 import com.fuwah.common.json.JSON;
-import com.fuwah.common.json.JSONObject;
 import com.fuwah.common.utils.http.HttpUtils;
 
 /**
@@ -16,12 +16,15 @@ public class AddressUtils
 {
     private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
-    public static final String IP_URL = "http://ip.taobao.com/service/getIpInfo.php";
+    // IP地址查询
+    public static final String IP_URL = "http://whois.pconline.com.cn/ipJson.jsp";
+
+    // 未知地址
+    public static final String UNKNOWN = "XX XX";
 
     public static String getRealAddressByIP(String ip)
     {
-        String address = "XX XX";
-
+        String address = UNKNOWN;
         // 内网不查询
         if (IpUtils.internalIp(ip))
         {
@@ -29,20 +32,18 @@ public class AddressUtils
         }
         if (Global.isAddressEnabled())
         {
-            String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
-            if (StringUtils.isEmpty(rspStr))
-            {
-                log.error("获取地理位置异常 {}", ip);
-                return address;
-            }
-            JSONObject obj;
             try
             {
-                obj = JSON.unmarshal(rspStr, JSONObject.class);
-                JSONObject data = obj.getObj("data");
-                String region = data.getStr("region");
-                String city = data.getStr("city");
-                address = region + " " + city;
+                String rspStr = HttpUtils.sendGet(IP_URL, "ip=" + ip + "&json=true");
+                if (StringUtils.isEmpty(rspStr))
+                {
+                    log.error("获取地理位置异常 {}", ip);
+                    return UNKNOWN;
+                }
+                com.alibaba.fastjson.JSONObject obj = JSONObject.parseObject(rspStr);
+                String region = obj.getString("pro");
+                String city = obj.getString("city");
+                return String.format("%s %s", region, city);
             }
             catch (Exception e)
             {
