@@ -25,7 +25,7 @@ public class VelocityUtils
 
     /**
      * 设置模板变量信息
-     * 
+     *
      * @return 模板列表
      */
     public static VelocityContext prepareContext(GenTable genTable)
@@ -49,13 +49,17 @@ public class VelocityUtils
         velocityContext.put("author", genTable.getFunctionAuthor());
         velocityContext.put("datetime", DateUtils.getDate());
         velocityContext.put("pkColumn", genTable.getPkColumn());
-        velocityContext.put("importList", getImportList(genTable.getColumns()));
+        velocityContext.put("importList", getImportList(genTable));
         velocityContext.put("permissionPrefix", getPermissionPrefix(moduleName, businessName));
         velocityContext.put("columns", genTable.getColumns());
         velocityContext.put("table", genTable);
         if (GenConstants.TPL_TREE.equals(tplCategory))
         {
             setTreeVelocityContext(velocityContext, genTable);
+        }
+        if (GenConstants.TPL_SUB.equals(tplCategory))
+        {
+            setSubVelocityContext(velocityContext, genTable);
         }
         return velocityContext;
     }
@@ -82,9 +86,27 @@ public class VelocityUtils
         }
     }
 
+    public static void setSubVelocityContext(VelocityContext context, GenTable genTable)
+    {
+        GenTable subTable = genTable.getSubTable();
+        String subTableName = genTable.getSubTableName();
+        String subTableFkName = genTable.getSubTableFkName();
+        String subClassName = genTable.getSubTable().getClassName();
+        String subTableFkClassName = StringUtils.convertToCamelCase(subTableFkName);
+
+        context.put("subTable", subTable);
+        context.put("subTableName", subTableName);
+        context.put("subTableFkName", subTableFkName);
+        context.put("subTableFkClassName", subTableFkClassName);
+        context.put("subTableFkclassName", StringUtils.uncapitalize(subTableFkClassName));
+        context.put("subClassName", subClassName);
+        context.put("subclassName", StringUtils.uncapitalize(subClassName));
+        context.put("subImportList", getImportList(genTable.getSubTable()));
+    }
+
     /**
      * 获取模板信息
-     * 
+     *
      * @return 模板列表
      */
     public static List<String> getTemplateList(String tplCategory)
@@ -104,6 +126,11 @@ public class VelocityUtils
         {
             templates.add("vm/html/tree.html.vm");
             templates.add("vm/html/list-tree.html.vm");
+        }
+        else if (GenConstants.TPL_SUB.equals(tplCategory))
+        {
+            templates.add("vm/html/list.html.vm");
+            templates.add("vm/java/sub-domain.java.vm");
         }
         templates.add("vm/html/add.html.vm");
         templates.add("vm/html/edit.html.vm");
@@ -134,6 +161,10 @@ public class VelocityUtils
         if (template.contains("domain.java.vm"))
         {
             fileName = StringUtils.format("{}/domain/{}.java", javaPath, className);
+        }
+        if (template.contains("sub-domain.java.vm") && StringUtils.equals(GenConstants.TPL_SUB, genTable.getTplCategory()))
+        {
+            fileName = StringUtils.format("{}/domain/{}.java", javaPath, genTable.getSubTable().getClassName());
         }
         else if (template.contains("mapper.java.vm"))
         {
@@ -184,7 +215,7 @@ public class VelocityUtils
 
     /**
      * 获取项目文件路径
-     * 
+     *
      * @return 路径
      */
     public static String getProjectPath()
@@ -199,7 +230,7 @@ public class VelocityUtils
 
     /**
      * 获取包前缀
-     * 
+     *
      * @param packageName 包名称
      * @return 包前缀名称
      */
@@ -212,13 +243,19 @@ public class VelocityUtils
 
     /**
      * 根据列类型获取导入包
-     * 
-     * @param column 列集合
+     *
+     * @param genTable 业务表对象
      * @return 返回需要导入的包列表
      */
-    public static HashSet<String> getImportList(List<GenTableColumn> columns)
+    public static HashSet<String> getImportList(GenTable genTable)
     {
+        List<GenTableColumn> columns = genTable.getColumns();
+        GenTable subGenTable = genTable.getSubTable();
         HashSet<String> importList = new HashSet<String>();
+        if (StringUtils.isNotNull(subGenTable))
+        {
+            importList.add("java.util.List");
+        }
         for (GenTableColumn column : columns)
         {
             if (!column.isSuperColumn() && GenConstants.TYPE_DATE.equals(column.getJavaType()))
@@ -235,7 +272,7 @@ public class VelocityUtils
 
     /**
      * 获取权限前缀
-     * 
+     *
      * @param moduleName 模块名称
      * @param businessName 业务名称
      * @return 返回权限前缀
@@ -248,7 +285,7 @@ public class VelocityUtils
 
     /**
      * 获取树编码
-     * 
+     *
      * @param options 生成其他选项
      * @return 树编码
      */
@@ -263,7 +300,7 @@ public class VelocityUtils
 
     /**
      * 获取树父编码
-     * 
+     *
      * @param options 生成其他选项
      * @return 树父编码
      */
@@ -278,7 +315,7 @@ public class VelocityUtils
 
     /**
      * 获取树名称
-     * 
+     *
      * @param options 生成其他选项
      * @return 树名称
      */
@@ -293,7 +330,7 @@ public class VelocityUtils
 
     /**
      * 获取需要在哪一列上面显示展开按钮
-     * 
+     *
      * @param genTable 业务表对象
      * @return 展开按钮列序号
      */

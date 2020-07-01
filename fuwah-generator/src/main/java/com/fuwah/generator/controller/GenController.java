@@ -1,9 +1,14 @@
 package com.fuwah.generator.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSON;
+import com.fuwah.common.core.domain.CxSelect;
+import com.fuwah.common.utils.StringUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +131,24 @@ public class GenController extends BaseController
     public String edit(@PathVariable("tableId") Long tableId, ModelMap mmap)
     {
         GenTable table = genTableService.selectGenTableById(tableId);
+        List<GenTable> genTables = genTableService.selectGenTableAll();
+        List<CxSelect> cxSelect = new ArrayList<CxSelect>();
+        for (GenTable genTable : genTables)
+        {
+            if (!StringUtils.equals(table.getTableName(), genTable.getTableName()))
+            {
+                CxSelect cxTable = new CxSelect(genTable.getTableName(), genTable.getTableName() + '：' + genTable.getTableComment());
+                List<CxSelect> cxColumns = new ArrayList<CxSelect>();
+                for (GenTableColumn tableColumn : genTable.getColumns())
+                {
+                    cxColumns.add(new CxSelect(tableColumn.getColumnName(), tableColumn.getColumnName() + '：' + tableColumn.getColumnComment()));
+                }
+                cxTable.setS(cxColumns);
+                cxSelect.add(cxTable);
+            }
+        }
         mmap.put("table", table);
+        mmap.put("data", JSON.toJSON(cxSelect));
         return prefix + "/edit";
     }
 

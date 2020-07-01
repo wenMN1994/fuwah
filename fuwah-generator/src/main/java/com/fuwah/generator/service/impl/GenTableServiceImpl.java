@@ -51,7 +51,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询业务信息
-     * 
+     *
      * @param id 业务ID
      * @return 业务信息
      */
@@ -65,7 +65,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询业务列表
-     * 
+     *
      * @param genTable 业务信息
      * @return 业务集合
      */
@@ -77,7 +77,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询据库列表
-     * 
+     *
      * @param genTable 业务信息
      * @return 数据库表集合
      */
@@ -89,7 +89,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询据库列表
-     * 
+     *
      * @param tableNames 表名称组
      * @return 数据库表集合
      */
@@ -100,8 +100,18 @@ public class GenTableServiceImpl implements IGenTableService
     }
 
     /**
+     * 查询所有表信息
+     *
+     * @return 表信息集合
+     */
+    public List<GenTable> selectGenTableAll()
+    {
+        return genTableMapper.selectGenTableAll();
+    }
+
+    /**
      * 修改业务
-     * 
+     *
      * @param genTable 业务信息
      * @return 结果
      */
@@ -123,7 +133,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 删除业务对象
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -137,7 +147,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 导入表结构
-     * 
+     *
      * @param tableList 导入表列表
      * @param operName 操作人员
      */
@@ -172,7 +182,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 预览代码
-     * 
+     *
      * @param tableId 表编号
      * @return 预览数据列表
      */
@@ -182,9 +192,10 @@ public class GenTableServiceImpl implements IGenTableService
         Map<String, String> dataMap = new LinkedHashMap<>();
         // 查询表信息
         GenTable table = genTableMapper.selectGenTableById(tableId);
-        // 查询列信息
-        List<GenTableColumn> columns = table.getColumns();
-        setPkColumn(table, columns);
+        // 设置主子表信息
+        setSubTable(table);
+        // 设置主键列信息
+        setPkColumn(table);
         VelocityInitializer.initVelocity();
 
         VelocityContext context = VelocityUtils.prepareContext(table);
@@ -204,7 +215,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 生成代码
-     * 
+     *
      * @param tableName 表名称
      * @return 数据
      */
@@ -220,7 +231,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 批量生成代码
-     * 
+     *
      * @param tableNames 表数组
      * @return 数据
      */
@@ -244,9 +255,10 @@ public class GenTableServiceImpl implements IGenTableService
     {
         // 查询表信息
         GenTable table = genTableMapper.selectGenTableByName(tableName);
-        // 查询列信息
-        List<GenTableColumn> columns = table.getColumns();
-        setPkColumn(table, columns);
+        // 设置主子表信息
+        setSubTable(table);
+        // 设置主键列信息
+        setPkColumn(table);
 
         VelocityInitializer.initVelocity();
 
@@ -278,7 +290,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 修改保存参数校验
-     * 
+     *
      * @param genTable 业务信息
      */
     @Override
@@ -301,17 +313,28 @@ public class GenTableServiceImpl implements IGenTableService
                 throw new BusinessException("树名称字段不能为空");
             }
         }
+        else if (GenConstants.TPL_SUB.equals(genTable.getTplCategory()))
+        {
+            if (StringUtils.isEmpty(genTable.getSubTableName()))
+            {
+                throw new BusinessException("关联子表的表名不能为空");
+            }
+            else if (StringUtils.isEmpty(genTable.getSubTableFkName()))
+            {
+                throw new BusinessException("子表关联的外键名不能为空");
+            }
+        }
     }
 
     /**
      * 设置主键列信息
-     * 
+     *
      * @param table 业务表信息
-     * @param columns 业务字段列表
      */
-    public void setPkColumn(GenTable table, List<GenTableColumn> columns)
+    public void setPkColumn(GenTable table)
     {
-        for (GenTableColumn column : columns)
+
+        for (GenTableColumn column : table.getColumns())
         {
             if (column.isPk())
             {
@@ -321,13 +344,42 @@ public class GenTableServiceImpl implements IGenTableService
         }
         if (StringUtils.isNull(table.getPkColumn()))
         {
-            table.setPkColumn(columns.get(0));
+            table.setPkColumn(table.getColumns().get(0));
+        }
+        if (GenConstants.TPL_SUB.equals(table.getTplCategory()))
+        {
+            for (GenTableColumn column : table.getSubTable().getColumns())
+            {
+                if (column.isPk())
+                {
+                    table.getSubTable().setPkColumn(column);
+                    break;
+                }
+            }
+            if (StringUtils.isNull(table.getSubTable().getPkColumn()))
+            {
+                table.getSubTable().setPkColumn(table.getSubTable().getColumns().get(0));
+            }
+        }
+    }
+
+    /**
+     * 设置主子表信息
+     *
+     * @param table 业务表信息
+     */
+    public void setSubTable(GenTable table)
+    {
+        String subTableName = table.getSubTableName();
+        if (StringUtils.isNotEmpty(subTableName))
+        {
+            table.setSubTable(genTableMapper.selectGenTableByName(subTableName));
         }
     }
 
     /**
      * 设置代码生成其他选项值
-     * 
+     *
      * @param genTable 设置后的生成对象
      */
     public void setTableFromOptions(GenTable genTable)
