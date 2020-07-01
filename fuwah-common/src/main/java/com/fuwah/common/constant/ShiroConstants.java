@@ -5,7 +5,7 @@ package com.fuwah.common.constant;
  * 
  * @author fuwah
  */
-public interface ShiroConstants
+public class ShiroConstants
 {
     /**
      * 当前登录的用户
