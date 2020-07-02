@@ -1,7 +1,9 @@
 package com.fuwah.web.controller.system;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.fuwah.system.domain.SysRole;
 import com.fuwah.system.domain.SysUserRole;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +109,7 @@ public class SysUserController extends BaseController
     @GetMapping("/add")
     public String add(ModelMap mmap)
     {
-        mmap.put("roles", roleService.selectRoleAll());
+        mmap.put("roles", roleService.selectRoleAll().stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
         mmap.put("posts", postService.selectPostAll());
         return prefix + "/add";
     }
@@ -145,8 +147,9 @@ public class SysUserController extends BaseController
     @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
     {
+        List<SysRole> roles = roleService.selectRolesByUserId(userId);
         mmap.put("user", userService.selectUserById(userId));
-        mmap.put("roles", roleService.selectRolesByUserId(userId));
+        mmap.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
         mmap.put("posts", postService.selectPostsByUserId(userId));
         return prefix + "/edit";
     }
