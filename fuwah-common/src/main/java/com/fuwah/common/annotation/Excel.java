@@ -30,6 +30,16 @@ public @interface Excel
     public String readConverterExp() default "";
 
     /**
+     * 分隔符，读取字符串组内容
+     */
+    public String separator() default ",";
+
+    /**
+     * 如果是字典类型，请设置字典的type值
+     */
+    public String dictType() default "";
+
+    /**
      * 导出类型（0数字 1字符串）
      */
     public ColumnType cellType() default ColumnType.STRING;

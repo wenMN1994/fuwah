@@ -4,6 +4,7 @@ import com.fuwah.common.constant.Constants;
 import com.fuwah.common.utils.CacheUtils;
 import com.fuwah.common.utils.StringUtils;
 import com.fuwah.system.domain.SysDictData;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @modified By：
  * @version: $
  */
+@Component
 public class DictUtils {
 
     /**
