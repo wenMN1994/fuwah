@@ -72,6 +72,19 @@ $(window).bind("load resize", function() {
     }
 });
 
+function syncMenuTab(dataId) {
+    if(isLinkage) {
+        var $dataObj = $('a[href$="' + decodeURI(dataId) + '"]');
+        if (!$dataObj.hasClass("noactive")) {
+            $('.nav ul').removeClass("in");
+            $dataObj.parents("ul").addClass("in")
+            $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
+            $dataObj.parents("ul").css('height', 'auto').height();
+            $dataObj.click();
+        }
+    }
+}
+
 function NavToggle() {
     $('.navbar-minimalize').trigger('click');
 }
@@ -119,6 +132,7 @@ $(function() {
     function setActiveTab(element) {
         if (!$(element).hasClass('active')) {
             var currentId = $(element).data('id');
+            syncMenuTab(currentId);
             // 显示tab对应的内容区
             $('.RuoYi_iframe').each(function() {
                 if ($(this).data('id') == currentId) {
@@ -239,6 +253,7 @@ $(function() {
             dataIndex = $(this).data('index'),
             menuName = $.trim($(this).text()),
             flag = true;
+
         if (!$('a[href$="' + dataUrl + '"]').hasClass("noactive")) {
             $(".nav ul li, .nav li").removeClass("selected");
             $(this).parent("li").addClass("selected");
@@ -385,7 +400,7 @@ $(function() {
             });
         }
         scrollToTab($('.menuTab.active'));
-        setIframeUrl($('.page-tabs-content').find('.active').attr('data-id'));
+        syncMenuTab($('.page-tabs-content').find('.active').attr('data-id'));
         return false;
     }
 
@@ -401,6 +416,7 @@ $(function() {
     function activeTab() {
         if (!$(this).hasClass('active')) {
             var currentId = $(this).data('id');
+            syncMenuTab(currentId);
             // 显示tab对应的内容区
             $('.mainContent .RuoYi_iframe').each(function() {
                 if ($(this).data('id') == currentId) {
@@ -443,7 +459,6 @@ $(function() {
             $(this).remove();
         });
         $('.page-tabs-content').css("margin-left", "0");
-        setIframeUrl($('.page-tabs-content').find('.active').attr('data-id'));
     }
 
     // 关闭全部选项卡
@@ -457,7 +472,7 @@ $(function() {
             $(this).addClass("active");
         });
         $('.page-tabs-content').css("margin-left", "0");
-        setIframeUrl($('.page-tabs-content').find('.active').attr('data-id'));
+        syncMenuTab($('.page-tabs-content').find('.active').attr('data-id'));
     }
 
 
