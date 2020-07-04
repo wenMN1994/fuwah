@@ -800,7 +800,16 @@ var table = {
 						options.callBack(index, layero);
 					}
 				}
-				layer.open({
+				var btnCallback = {};
+				if(options.btn instanceof Array){
+					for (var i = 1, len = options.btn.length; i < len; i++) {
+						var btn = options["btn" + (i + 1)];
+						if (btn) {
+							btnCallback["btn" + (i + 1)] = btn;
+						}
+					}
+				}
+				layer.open($.extend({
 					type: 2,
 					maxmin: true,
 					shade: 0.3,
@@ -815,7 +824,7 @@ var table = {
 					cancel: function () {
 						return true;
 					}
-				});
+				}, btnCallback));
 			},
 			// 弹出层全屏
 			openFull: function (title, url, width, height) {
