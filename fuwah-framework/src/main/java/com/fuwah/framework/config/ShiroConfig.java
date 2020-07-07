@@ -85,6 +85,10 @@ public class ShiroConfig
     @Value("${shiro.cookie.maxAge}")
     private int maxAge;
 
+    // 设置cipherKey密钥
+    @Value("${shiro.cookie.cipherKey}")
+    private String cipherKey;
+
     // 登录地址
     @Value("${shiro.user.loginUrl}")
     private String loginUrl;
@@ -327,7 +331,7 @@ public class ShiroConfig
     {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());
-        cookieRememberMeManager.setCipherKey(Base64.decode("fCq+/xW488hMTCD+cmJ3aQ=="));
+        cookieRememberMeManager.setCipherKey(Base64.decode(cipherKey));
         return cookieRememberMeManager;
     }
 
