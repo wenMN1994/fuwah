@@ -11,7 +11,7 @@
  Target Server Version : 50728
  File Encoding         : 65001
 
- Date: 01/07/2020 10:37:28
+ Date: 17/08/2020 10:37:47
 */
 
 SET NAMES utf8mb4;
@@ -34,6 +34,8 @@ CREATE TABLE `gen_table`  (
   `business_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成业务名',
   `function_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成功能名',
   `function_author` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '生成功能作者',
+  `gen_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '生成代码方式（0：zip压缩包 1：自定义路径）',
+  `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
   `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '其它生成选项',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
@@ -213,7 +215,7 @@ CREATE TABLE `qrtz_scheduler_state`  (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('FuWahScheduler', 'LAPTOP-GHVKEMRU1593570460066', 1593570959441, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('FuWahScheduler', 'LAPTOP-GHVKEMRU1593855347996', 1593855548286, 15000);
 INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'LAPTOP-GHVKEMRU1571756264961', 1571756614343, 15000);
 
 -- ----------------------------
@@ -283,9 +285,9 @@ CREATE TABLE `qrtz_triggers`  (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1593570460000, -1, 5, 'PAUSED', 'CRON', 1593570460000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1593570465000, -1, 5, 'PAUSED', 'CRON', 1593570460000, 0, NULL, 2, '');
-INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1593570460000, -1, 5, 'PAUSED', 'CRON', 1593570460000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1593855350000, -1, 5, 'PAUSED', 'CRON', 1593855348000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1593855360000, -1, 5, 'PAUSED', 'CRON', 1593855348000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('FuWahScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1593855360000, -1, 5, 'PAUSED', 'CRON', 1593855348000, 0, NULL, 2, '');
 INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1571756270000, -1, 5, 'PAUSED', 'CRON', 1571756265000, 0, NULL, 2, '');
 INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1571756265000, -1, 5, 'PAUSED', 'CRON', 1571756265000, 0, NULL, 2, '');
 INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1571756280000, -1, 5, 'PAUSED', 'CRON', 1571756265000, 0, NULL, 2, '');
@@ -587,7 +589,7 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '提示消息',
   `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 217 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 223 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -709,6 +711,12 @@ INSERT INTO `sys_logininfor` VALUES (213, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (214, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-04-28 16:03:59');
 INSERT INTO `sys_logininfor` VALUES (215, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-05-19 15:34:45');
 INSERT INTO `sys_logininfor` VALUES (216, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-07-01 10:28:12');
+INSERT INTO `sys_logininfor` VALUES (217, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2020-07-01 11:03:56');
+INSERT INTO `sys_logininfor` VALUES (218, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-07-01 11:04:22');
+INSERT INTO `sys_logininfor` VALUES (219, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '登录成功', '2020-07-04 17:22:37');
+INSERT INTO `sys_logininfor` VALUES (220, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '0', '退出成功', '2020-07-04 17:30:22');
+INSERT INTO `sys_logininfor` VALUES (221, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2020-07-04 17:30:36');
+INSERT INTO `sys_logininfor` VALUES (222, 'admin', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', '1', '验证码错误', '2020-07-04 17:30:40');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1230,7 +1238,7 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', 'admin', '00', 'admin@fuwah.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2020-07-01 10:28:12', 'admin', '2018-03-16 11:33:00', 'fuwah', '2020-07-01 10:28:12', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', 'admin', '00', 'admin@fuwah.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2020-07-04 17:22:37', 'admin', '2018-03-16 11:33:00', 'fuwah', '2020-07-04 17:22:37', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'fuwah', '富华', '00', 'fuwah@fuwah.com', '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', 'admin', '2019-10-24 20:56:46', '测试员');
 
 -- ----------------------------
@@ -1251,11 +1259,6 @@ CREATE TABLE `sys_user_online`  (
   `expire_time` int(5) NULL DEFAULT 0 COMMENT '超时时间，单位为分钟',
   PRIMARY KEY (`sessionId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '在线用户记录' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_user_online
--- ----------------------------
-INSERT INTO `sys_user_online` VALUES ('303b403a-d689-4c73-8d10-13550a0a03d2', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 8', 'Windows 10', 'on_line', '2020-07-01 10:27:58', '2020-07-01 10:34:14', 1800000);
 
 -- ----------------------------
 -- Table structure for sys_user_post
