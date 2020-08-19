@@ -9,13 +9,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.fuwah.common.utils.spring.SpringUtils;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -845,6 +840,7 @@ public class ExcelUtil<T>
                 }
             }
         }
+        this.fields = this.fields.stream().sorted(Comparator.comparing(objects -> ((Excel) objects[1]).sort())).collect(Collectors.toList());
     }
 
     /**
