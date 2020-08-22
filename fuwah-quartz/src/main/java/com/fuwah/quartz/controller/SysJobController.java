@@ -1,6 +1,8 @@
 package com.fuwah.quartz.controller;
 
 import java.util.List;
+
+import com.fuwah.quartz.util.CronUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +130,10 @@ public class SysJobController extends BaseController
     @ResponseBody
     public AjaxResult addSave(@Validated SysJob job) throws SchedulerException, TaskException
     {
+        if (!CronUtils.isValid(job.getCronExpression()))
+        {
+            return AjaxResult.error("cron表达式不正确");
+        }
         return toAjax(jobService.insertJob(job));
     }
 
@@ -150,6 +156,10 @@ public class SysJobController extends BaseController
     @ResponseBody
     public AjaxResult editSave(@Validated SysJob job) throws SchedulerException, TaskException
     {
+        if (!CronUtils.isValid(job.getCronExpression()))
+        {
+            return AjaxResult.error("cron表达式不正确");
+        }
         return toAjax(jobService.updateJob(job));
     }
 
