@@ -2,6 +2,8 @@ package com.fuwah.common.utils.file;
 
 import java.io.File;
 import java.io.IOException;
+
+import com.fuwah.common.utils.uuid.IdUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 import com.fuwah.common.config.Global;
@@ -34,8 +36,6 @@ public class FileUploadUtils
      * 默认上传的地址
      */
     private static String defaultBaseDir = Global.getProfile();
-
-    private static int counter = 0;
 
     public static void setDefaultBaseDir(String defaultBaseDir)
     {
@@ -125,7 +125,7 @@ public class FileUploadUtils
     {
         String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
-        fileName = DateUtils.datePath() + "/" + encodingFilename(fileName) + "." + extension;
+        fileName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
         return fileName;
     }
 
@@ -150,16 +150,6 @@ public class FileUploadUtils
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
         return pathFileName;
-    }
-
-    /**
-     * 编码文件名
-     */
-    private static final String encodingFilename(String fileName)
-    {
-        fileName = fileName.replace("_", " ");
-        fileName = Md5Utils.hash(fileName + System.nanoTime() + counter++);
-        return fileName;
     }
 
     /**
@@ -227,7 +217,7 @@ public class FileUploadUtils
 
     /**
      * 获取文件名的后缀
-     * 
+     *
      * @param file 表单文件
      * @return 后缀名
      */
